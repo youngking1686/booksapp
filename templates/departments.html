@@ -1,0 +1,146 @@
+{% extends "layout.html"%} 
+{% block content %}
+<head>
+    <title>Booksapp - Courses</title>
+
+    <!-- Custom styles for this page -->
+    <link href="/static/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+</head>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+        <div style="margin-left: 40%;text-align: center;">
+            <div class="col-lg-6 mb-4">
+                <div class="bg-{{ category }} text-white shadow">
+                    <div class="alert-dismissible close" onclick="this.parentElement.style.display='none';">&times;</div>
+                    <div class="card-body">
+                        <strong>{{ category }}!</strong> 
+                        <div class="text-white-70 small">{{ message }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>    
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+<body>
+        <div class="container-fluid">
+            <!-- Page Heading -->
+            <h2 class="h3 mb-2 text-gray-800">Course Management</h2>
+
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Courses List</h6>
+                    <button style="float:left" class="btn btn-primary" type="button" data-toggle="modal" data-target="#createdeptModal"><i
+                        class="fas fas fa-users fa-sm text-white-50"></i>&nbsp;Add Course</button>
+                    <a style= "float:right;" onclick="download_table_as_csv('department_Table');" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                        class="fas fa-download fa-sm text-white-50"></i> Download</a>
+                    <!-- Create dept Modal -->
+                    <div class="modal fade" id="createdeptModal" tabindex="-1" role="dialog" aria-labelledby="createdeptLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="createdeptLabel">Add New Course</h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                </div>
+                                <form class="user" id="newdept" action="/createdepartment" method="post">
+                                    <div class="modal-body">
+                                        <div class="col-sm mb-3 mb-sm-0">
+                                            <label for="dept_name">Course Name</label>
+                                            <input type="text" class="form-control" id="dept_name" name="dept_name">
+                                        </div>
+                                        <div class="col-sm">
+                                            <label for="dept_id">Course Id</label>
+                                            <input type="text" class="form-control" id="dept_id" name="dept_id">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer"><button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+                                    <button class="btn btn-primary" type="submit">Add Course</button></div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="department_Table" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Course Name</th>
+                                    <th>Course Id</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for dept in department_list %}
+                                    <tr>
+                                        <td> {{ dept.dept_name }}</td>
+                                        <td>{{ dept.dept_id }}</td>
+                                        <td style="text-align: center;">
+                                            <button class="btn btn-circle btn-sm" type="button" data-toggle="modal" data-target="#deleteModal{{ dept.dept_id }}"><i class="fas fa-trash-alt fa-2x" ></i></button>
+                                            <!-- Delete confirm Modal -->
+                                            <form action="/deletedepartment" method="post">
+                                                <input class="field" type="hidden" name="del_dept_id" value={{ dept.dept_id }}>
+                                                <input class="field" type="hidden" name="delete" value="delete">
+                                                <div class="modal fade" id="deleteModal{{ dept.dept_id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="deleteModalLabel">Delete Course</h5>
+                                                                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                                            </div>
+                                                                <div class="modal-body">
+                                                                    <p>Are you sure you want to remove the Course <strong>{{ dept.dept_name }}</strong>.</p>
+                                                                </div>
+                                                                <div class="modal-footer"><button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+                                                                <button class="btn btn-primary" type="submit">Confirm</button></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container-fluid -->
+<script>
+    // Quick and simple export target #table_id into a csv
+    function download_table_as_csv(table_id, separator = ',') {
+        // Select rows from table_id
+        var rows = document.querySelectorAll('table#' + table_id + ' tr');
+        // Construct csv
+        var csv = [];
+        for (var i = 0; i < rows.length; i++) {
+            var row = [], cols = rows[i].querySelectorAll('td, th');
+            for (var j = 0; j < cols.length; j++) {
+                // Clean innertext to remove multiple spaces and jumpline (break csv)
+                var data = cols[j].innerText.replace(/(\r\n|\n|\r)/gm, '').replace(/(\s\s)/gm, ' ')
+                // Escape double-quote with double-double-quote (see https://stackoverflow.com/questions/17808511/properly-escape-a-double-quote-in-csv)
+                data = data.replace(/"/g, '""');
+                // Push escaped string
+                row.push('"' + data + '"');
+            }
+            csv.push(row.join(separator));
+        }
+        var csv_string = csv.join('\n');
+        // Download it
+        var filename = 'export_' + table_id + '_' + new Date().toLocaleDateString() + '.csv';
+        var link = document.createElement('a');
+        link.style.display = 'none';
+        link.setAttribute('target', '_blank');
+        link.setAttribute('href', 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv_string));
+        link.setAttribute('download', filename);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+</script>
+</body>
+{% endblock content %}

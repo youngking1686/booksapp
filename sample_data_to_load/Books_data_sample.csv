@@ -1,0 +1,59 @@
+id,book_name,book_code,dept_name,sems,subject,sub_code,medium,paper,price
+1,"Book-???   ?????????",BK01,"B.A. TAMIL",1,"???   ?????????",SUTL305,English,Core,100
+2,book2,BK02,"BSC Computer Science",5,life,LF01,Tamil,core,300
+4,book3,BK03,MCA,5,asda,wewww,Tamil,test,90
+7,Book-????????????,BK07,"B.A LITERATURE IN TAMIL",1,????????????,"SULT 306",English,Core,100
+9,Book-????????????,BK09,"B.A LITERATURE IN TAMIL",1,????????????,"SULT 308",English,Core,100
+13,Book-Shakespeare,BK13,B.A.English,1,Shakespeare,SUEN307,English,Core,100
+15,"Book-Value Education",BK15,B.A.English,1,"Value Education",AECC-II,English,Core,100
+16,"Book-Macro Economics-II",BK16,B.A.English,1,"Macro Economics-II","SUEC 305",English,Core,100
+17,"Book-Public Finance-II",BK17,B.A.English,1,"Public Finance-II","SUEC 306",English,Core,100
+18,"Book-Monetary Economics",BK18,B.A.English,1,"Monetary Economics","SUEC 307",English,Core,100
+19,"Book-Managerial Economics",BK19,B.A.English,1,"Managerial Economics","SUEC 308",English,Core,100
+20,"Book-Value Education",BK20,B.A.English,1,"Value Education",AECC-II,English,Core,100
+25,"Book-Value Education",BK25,"B.A. Historical Studies",1,"Value Education",AECC-II,English,Core,100
+30,"Book-Value Education",BK30,"B.A. Public Administration (E/M)",1,"Value Education",AECC-II,English,Core,100
+35,"Book-Value Education",BK35,"B.A. Public Administration (E/M)",1,"Value Education",AECC-II,English,Core,100
+37,Book-Victimology,BK37,"B.A. Criminology and Police Administration",1,Victimology,SUCP306,English,Core,100
+40,"Book-Value Education",BK40,"B.A. Criminology and Police Administration",1,"Value Education",AECC-II,English,Core,100
+42,"Book-Business Taxation",BK42,"B.Com (E/M)",1,"Business Taxation","SUCM 306",English,Core,100
+44,"Book-Portfolio Management",BK44,"B.Com (E/M)",1,"Portfolio Management","SUCM 308",English,Core,100
+45,"Book-Value Education",BK45,"B.Com (E/M)",1,"Value Education",AECC-II,English,Core,100
+47,"Book-Business Taxation",BK47,"B.Com. (T/M)",1,"Business Taxation","SUCM 306T",Tamil,Core,100
+49,"Book-Portfolio Management",BK49,"B.Com. (T/M)",1,"Portfolio Management","SUCM 308T",Tamil,Core,100
+50,"Book-Value Education",BK50,"B.Com. (T/M)",1,"Value Education",AECC-II,English,Core,100
+52,"Book-Industrial Law",BK52,"B.Com. Corporate Secretaryship (E.M)",1,"Industrial Law",SUCR306,English,Core,100
+54,"Book-Financial Markets",BK54,"B.Com. Corporate Secretaryship (E.M)",1,"Financial Markets",SUCR308,English,Core,100
+55,"Book-Value Education",BK55,"B.Com. Corporate Secretaryship (E.M)",1,"Value Education",AECC-II,English,Core,100
+57,"Book-Industrial Law",BK57,"B.Com Corporate Secretaryship (T.M)",1,"Industrial Law",SUCR306T,Tamil,Core,100
+59,"Book-Financial Markets",BK59,"B.Com Corporate Secretaryship (T.M)",1,"Financial Markets",SUCR308T,Tamil,Core,100
+60,"Book-Value Education",BK60,"B.Com Corporate Secretaryship (T.M)",1,"Value Education",AECC-II,English,Core,100
+64,Book-MerchantBanking,BK64,"B.Com. Bank Management (E.M)",1,MerchantBanking,SUBT308,English,Core,100
+65,"Book-Value Education",BK65,"B.Com. Bank Management (E.M)",1,"Value Education",AECC-II,English,Core,100
+69,Book-MerchantBanking,BK69,"B.Com. Bank Management (T.M)",1,MerchantBanking,SUBT308T,Tamil,Core,100
+70,"Book-Value Education",BK70,"B.Com. Bank Management (T.M)",1,"Value Education",AECC-II,English,Core,100
+72,"Book-Web Technology",BK72,"B.Com Computer Application (E.M)",1,"Web Technology",SUCC306,English,Core,100
+73,"Book-Web Technology Lab",BK73,"B.Com Computer Application (E.M)",1,"Web Technology Lab",SUCC307,English,Core,100
+74,"Book-Financial Management",BK74,"B.Com Computer Application (E.M)",1,"Financial Management",SUCC308,English,Core,100
+75,"Book-Value Education",BK75,"B.Com Computer Application (E.M)",1,"Value Education",AECC-II,English,Core,100
+77,"Book-Web Technology",BK77,"B.Com Computer Application (T.M)",1,"Web Technology",SUCC306T,Tamil,Core,100
+78,"Book-Web Technology Lab",BK78,"B.Com Computer Application (T.M)",1,"Web Technology Lab",SUCC307T,Tamil,Core,100
+79,"Book-Financial Management",BK79,"B.Com Computer Application (T.M)",1,"Financial Management",SUCC308T,Tamil,Core,100
+80,"Book-Value Education",BK80,"B.Com Computer Application (T.M)",1,"Value Education",AECC-II,English,Core,100
+81,"Book-Business Taxation",BK81,"B.B.A (E.M)",1,"Business Taxation","SUBA 305",English,Core,100
+84,"Book-Services Marketing",BK84,"B.B.A (E.M)",1,"Services Marketing","SUBA 308",English,Core,100
+85,"Book-Value Education",BK85,"B.B.A (E.M)",1,"Value Education",AECC-II,English,Core,100
+86,"Book-Business Taxation",BK86,"B.B.A (T.M)",1,"Business Taxation","SUBA 305T",Tamil,Core,100
+89,"Book-Services Marketing",BK89,"B.B.A (T.M)",1,"Services Marketing","SUBA 308T",Tamil,Core,100
+90,"Book-Value Education",BK90,"B.B.A (T.M)",1,"Value Education",AECC-II,English,Core,100
+91,"Book-Web Technology",BK91,B.C.A,1,"Web Technology","SUCA 305",English,Core,100
+93,"Book-Software Testing",BK93,B.C.A,1,"Software Testing","SUCA 307",English,Core,100
+95,"Book-Multimedia Systems",BK95,B.C.A,1,"Multimedia Systems","SUCA 309",English,Core,100
+96,"Book-Value Education",BK96,B.C.A,1,"Value Education",AECC-II,English,Core,100
+97,"Book-Linear Algebra",BK97,"B.Sc. Mathematics",1,"Linear Algebra",SUMA305,English,Core,100
+98,"Book-Real Analysis-II",BK98,"B.Sc. Mathematics",1,"Real Analysis-II",SUMA306,English,Core,100
+99,"Book-Complex Analysis",BK99,"B.Sc. Mathematics",1,"Complex Analysis",SUMA307,English,Core,100
+100,"Book-Operations Research",BK100,"B.Sc. Mathematics",1,"Operations Research",SUMA308,English,Core,100
+101,"Book-Value Education",BK101,"B.Sc. Mathematics",1,"Value Education",AECC-II,English,Core,100
+102,"Book-Social Psycholog",BK102,"B.Sc. Psychology",1,"Social Psycholog",SUPY305,English,Core,100
+106,"Book-Value Education",BK106,"B.Sc. Psychology",1,"Value Education",AECC-II,English,Core,100

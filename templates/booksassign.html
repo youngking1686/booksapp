@@ -1,0 +1,171 @@
+{% extends "layout.html"%} 
+{% block content %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+        <div style="margin-left: 40%;text-align: center;">
+            <div class="col-lg-6 mb-4">
+                <div class="bg-{{ category }} text-white shadow">
+                    <div class="alert-dismissible close" onclick="this.parentElement.style.display='none';">&times;</div>
+                    <div class="card-body">
+                        <strong>{{ category }}!</strong> 
+                        <div class="text-white-70 small">{{ message }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>    
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <head>
+        <script src="/static/js/autocomplete.js"></script>
+    </head>
+<body>
+    <div class="container-fluid">
+        <!-- Group setting Card -->
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card shadow mb-4">
+                    <form action="/searchstudent" method="POST" id="searchstudent" onsubmit="return validateForm()">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Student Search</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <input class="field" type="hidden" name="search" value="search">
+                                <div class="col-sm mb-3 mb-sm-0">
+                                    <label style="font-size: 16px;" for="reg_num">Student Register Number: </label>
+                                    <input type="text" id="reg_num" name="reg_num" value = {{ reg_num }}>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </div>
+                    </form>
+                    <!-- <hr> -->
+                    <div class="card-body" >
+                        <h8 class="m-0 font-weight-bold text-primary">Student Details</h8>
+                        {% if student_detail  %}
+                        <p>
+                            Student Name : {{student_detail.student_name}};
+                            Reg.No. : {{student_detail.reg_num}};
+                            Course : {{student_detail.dept_name}};
+                            Semester : {{student_detail.sems}};
+                            Medium : {{student_detail.medium}}
+                        </p>
+                        {% endif%}
+                        <hr>
+                        <h8 class="m-0 font-weight-bold text-primary">Assigned Books</h8>
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="have_Table" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Book Name</th>
+                                        <th>Subject</th>
+                                        <th>Subject code</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for book in have_book_list %}
+                                        <tr>
+                                            <td> {{ book.book_name }}</td>
+                                            <td>{{ book.subject }}</td>
+                                            <td>{{ book.sub_code }}</td>
+                                            <td style="text-align: center;">
+                                                <button class="btn btn-circle btn-sm" type="button" data-toggle="modal" data-target="#deleteModal{{ book.book_code }}"><i class="fas fa-trash-alt fa-2x" ></i></button>
+                                                <!-- Delete confirm Modal -->
+                                                <form action="/removebook" method="post">
+                                                    <input class="field" type="hidden" name="del_book_code" value={{ book.book_code }}>
+                                                    <input class="field" type="hidden" name="del_reg_num" value={{ student_detail.reg_num }}>
+                                                    <input class="field" type="hidden" name="delete" value="delete">
+                                                    <div class="modal fade" id="deleteModal{{ book.book_code }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="deleteModalLabel">Remove Assigned Book</h5>
+                                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                                                </div>
+                                                                    <div class="modal-body">
+                                                                        <p>Are you sure you want to remove the Assigned Book <strong>{{ book.book_name }}</strong>.</p>
+                                                                    </div>
+                                                                    <div class="modal-footer"><button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+                                                                    <button class="btn btn-primary" type="submit">Confirm</button></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Assign From All Books List</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="alllist_Table" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Add</th>
+                                        <th>Bk. Name</th>
+                                        <th>Bk. Code</th>
+                                        <th>Subject</th>
+                                        <th>Sub. code</th>
+                                        <th>Dept. name</th>
+                                        <th>Semester</th>
+                                        <th>Paper</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for book in all_book_list %}
+                                        <tr>
+                                            <td style="text-align: center;">
+                                                <form action="/oneassign" method="POST" id="oneassign" onsubmit="return addvalidateForm()">
+                                                    <input class="field" type="hidden" name="assign_book_code" value={{ book.book_code }}>
+                                                    <input class="field" type="hidden" name="assign_reg_num" value={{ student_detail.reg_num }}>
+                                                    <button class="btn btn-circle btn-sm" type="submit"><i class="fas fa-plus fa-2x" ></i></button>
+                                                </form>
+                                            </td>
+                                            <td> {{ book.book_name }}</td>
+                                            <td> {{ book.book_code}}</td>
+                                            <td> {{ book.subject }}</td>
+                                            <td> {{ book.sub_code }}</td>
+                                            <td> {{ book.dept_name}}</td>
+                                            <td> {{ book.sems}}</td>
+                                            <td> {{ book.paper}}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+        function validateForm() {
+            var x = document.forms["searchstudent"]["reg_num"].value;
+            if (x == "" || x == null ) 
+            {
+                alert("Student Register Number cannot be empty");
+                return false;
+            }
+            }
+        function addvalidateForm() {
+            var x = document.forms["oneassign"]["assign_reg_num"].value;
+            if (x == "" || x == null ) 
+            {
+                alert("Student Register Number cannot be empty");
+                return false;
+            }
+            }
+</script>
+{% endblock content %}
